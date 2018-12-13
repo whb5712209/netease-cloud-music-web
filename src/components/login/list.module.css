@@ -1,0 +1,24 @@
+.box {
+  width: 158px;
+  background: #2b2b2b;
+  border: 1px solid #202020;
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.50);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.inner {
+}
+.f_cb {
+}
+.ltb {
+  float: left;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  height: 38px;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: #ccc;
+  line-height: 39px;
+}

@@ -1,21 +1,26 @@
 import React, { useState, useEffect, useContext } from 'react'
 import style from './index.module.css'
-import './index.css'
 import { HeaderList } from '../../config/constant'
 import GlobalContext from '../../store/'
 import { setLoginType } from '../../store/actions/user'
 import API from '../../api/index'
 import Input from '../field/input'
 import Button from '../button'
-import Dialog from '../dialog/follow'
+import Dialog from '../dialog'
+import Login from '../login'
 
-// function login () {}
+function login (type) {
+  console.log(type)
+}
 export default function Header () {
   const [ count, setCount ] = useState(1)
-  const [ isShowLoginDialog, setLoginDialogType ] = useState(false)
-  const { userState: { isLogin }, dispatch, ajax } = useContext(GlobalContext)
+  const [ isShowLoginTypeDialog, setLoginDialogType ] = useState(false)
+  const [ isShowLoginDialog, setLoginDialog ] = useState(false)
+  const { userState: { isLogin, userInfo }, dispatch, ajax } = useContext(GlobalContext)
   useEffect(() => {
     ajax(API.getSearch, '海阔天空')
+    // ajax(API.getUserSubcount)
+    // eslint-disable-next-line no-undef
   }, [])
   return (
     <React.Fragment>
@@ -46,15 +51,30 @@ export default function Header () {
               视频征集
             </a>
             <div>
-              <Button
-                className={style.login_btn}
-                onClick={() => {
-                  // login.apply(this)
-                  setLoginDialogType(!isShowLoginDialog)
-                }}>
-                登录
-              </Button>
-              {isShowLoginDialog && <Dialog>登录</Dialog>}
+              {isLogin && <div className={style.nickname}>{userInfo.profile.nickname}</div>}
+              {!isLogin && (
+                <React.Fragment>
+                  <Button
+                    className={style.login_btn}
+                    onClick={() => {
+                      setLoginDialogType(!isShowLoginTypeDialog)
+                    }}>
+                    登录
+                  </Button>
+                  {isShowLoginTypeDialog && (
+                    <Dialog.Follow>
+                      <Login.List
+                        onClick={(type) => {
+                          if (type === 0) {
+                            setLoginDialog(!isShowLoginDialog)
+                            setLoginDialogType(!isShowLoginTypeDialog)
+                          }
+                        }}
+                      />
+                    </Dialog.Follow>
+                  )}
+                </React.Fragment>
+              )}
             </div>
           </div>
         </div>
@@ -64,9 +84,19 @@ export default function Header () {
         onClick={() => {
           setCount(count + 1)
           dispatch(setLoginType(!isLogin))
+          // getUserSubcount
         }}>
         Click me{count}
       </button>
+      {isShowLoginDialog && (
+        <Dialog.Global>
+          <Login
+            onClick={(type) => {
+              login()
+            }}
+          />
+        </Dialog.Global>
+      )}
     </React.Fragment>
   )
 }

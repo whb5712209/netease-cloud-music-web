@@ -1,3 +1,8 @@
+import React from 'react'
+import Modal from './modal'
+import noop from '../../config/constant'
+import style from './global.module.css'
+
 /**
  * @module components/dialog/global
  * @desc 相对全局弹框
@@ -9,6 +14,23 @@
  * 
  */
 
-export function index () {}
-
-export function base () {}
+export default ({
+  children = '',
+  isShowMask = true,
+  level = 'left',
+  vertical = 'top',
+  onClose = noop,
+  ...modalProps
+}) => {
+  return (
+    <Modal
+      {...modalProps}
+      isShowMask={isShowMask}
+      className={`${style.global} ${level === 'left' ? style.left : style.right} ${vertical === 'top'
+        ? style.top
+        : style.bottom}`}>
+      <div className={style.close} onClick={onClose} />
+      {children}
+    </Modal>
+  )
+}

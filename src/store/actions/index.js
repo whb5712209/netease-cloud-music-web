@@ -2,21 +2,23 @@ export const REQUEST_TYPE = 'REQUEST_START'
 
 export function ajax (dispatch, ajaxFunc, params, sucCallback, failCallback) {
   dispatch(setAjaxStart())
-  ajaxFunc(params).then(
+  return ajaxFunc(params).then(
     (data) => {
       dispatch(setAjaxSuccess())
-      sucCallback && sucCallback(data)
+      if (sucCallback) sucCallback(data)
+      else return data
     },
     (data) => {
       dispatch(setAjaxError())
-      failCallback && failCallback(data)
+      if (failCallback) failCallback(data)
+      else return Promise.reject(data)
     }
   )
 }
 export default new Proxy(ajax, {
   apply: (target, ctx, [ dispatch, ...other ]) => {
     return (ajaxFunc, params, sucCallback, failCallback) => {
-      target(dispatch, ajaxFunc, params, sucCallback, failCallback)
+      return target(dispatch, ajaxFunc, params, sucCallback, failCallback)
     }
   }
 })

@@ -102,3 +102,7 @@
   margin: 0 0 0 20px;
   cursor: pointer;
 }
+.nickname {
+  color: #eee;
+  margin: 0 10px;
+}
