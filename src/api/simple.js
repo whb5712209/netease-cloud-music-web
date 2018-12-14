@@ -1,9 +1,8 @@
 import fetch from './fetch'
-import axios from './axios'
 import { setUrlParams } from '../utils/url'
 
 const methodList = [ 'get', 'post', 'delete', 'put', 'update' ]
-const ajaxType = { fetch: fetch, axios: axios }
+const ajaxType = { fetch: fetch }
 const shortcut = {}
 function getSimple (type) {
   methodList.forEach((item) => {
@@ -23,7 +22,7 @@ function getSimple (type) {
 }
 
 function getPrefix (url) {
-  return (process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:3333/' : '') + url
+  return `${process.env.REACT_APP_PREFIX}/${url}`
 }
 
 function assemble (opt, type) {
