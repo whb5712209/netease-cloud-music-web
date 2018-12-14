@@ -4,7 +4,7 @@ import axios from 'axios'
 axios.defaults.baseURL = '//localhost:3333/'
 axios.defaults.withCredentials = true
 axios.defaults.headers['Content-Type'] = 'application/json; charset=utf-8' //此处是增加的代码，设置请求头的类型
-
+axios.defaults.headers['Accept'] = 'application/json; charset=utf-8'
 axios.defaults.transformRequest = [
   function (data) {
     let newData = ''
@@ -17,6 +17,7 @@ axios.defaults.transformRequest = [
 // http request 拦截器
 axios.interceptors.request.use(
   (config) => {
+    console.log('axios请求....')
     return config
   },
   (err) => {
@@ -27,11 +28,42 @@ axios.interceptors.request.use(
 // http response 拦截器
 axios.interceptors.response.use(
   (response) => {
-    return response
+    return success(response.data)
   },
-  (error) => {
-    return Promise.reject(error.response.data)
+  (err) => {
+    debugger
+    return Promise.reject(error(err))
   }
 )
 
 export default axios
+
+function error (res) {
+  switch (res.status) {
+    case 404:
+      return {
+        code: res.status,
+        message: res.message || '无效地址',
+        originalMessage: res.statusText
+      }
+    case 500:
+      return {
+        code: res.status,
+        message: res.message || '服务端崩溃了',
+        originalMessage: res.statusText
+      }
+    default:
+      return {
+        code: res.status,
+        message: res.message || '请检查网络',
+        originalMessage: res.statusText
+      }
+  }
+}
+
+function success (data) {
+  if (data.code === 200) {
+    return data.result
+  }
+  return error({ status: data.code, message: data.message, statusText: data.statusText })
+}

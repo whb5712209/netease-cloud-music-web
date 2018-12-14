@@ -8,6 +8,7 @@ export function supportLoaclStorage () {
   @param {Object} value 保存数据的值
 * */
 export function saveData (name, value) {
+  if (typeof value === undefined || value === null) return
   let storeValue = JSON.stringify(value)
   if (supportLoaclStorage()) {
     window.localStorage.setItem(name, storeValue)

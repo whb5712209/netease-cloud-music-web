@@ -7,9 +7,6 @@ import { setUserInfo } from '../../store/actions/user'
 
 import style from './phone.module.css'
 
-// function login (ajax, params = {}) {
-//   return ajax(API.login, params)
-// }
 export default ({ onLogin }) => {
   const { userState: { userInfo }, dispatch, ajax } = useContext(GlobalContext)
 
@@ -37,10 +34,8 @@ export default ({ onLogin }) => {
         <Button
           onClick={() => {
             ajax(API.login, { phone, password: pwd })
-              .then((res) => {
-                console.log(res)
-                // res.result
-                dispatch(setUserInfo(res.result))
+              .then((data) => {
+                dispatch(setUserInfo(data))
               })
               .catch((error) => {
                 console.error(error)

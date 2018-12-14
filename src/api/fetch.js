@@ -1,15 +1,18 @@
-export default async ({ url, method, opt: { headers, ...otherOpts } = { headers: {}, otherOpts: {} } }) => {
+// XMLHttpRequest.withCredentials = true
+export default async ({ url, method, headers, ...otherOpts }) => {
+  console.log('fetch请求....')
+  const xhr = new XMLHttpRequest()
+  xhr.withCredentials = true
   const res = await fetch(url, {
     headers: new Headers({
       Accept: 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
       ...headers
     }),
     ...otherOpts
   })
-
   if (res.ok) {
-    success(res.json())
+    return success(await res.json())
   }
   return error(res)
 }

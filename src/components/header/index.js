@@ -17,11 +17,7 @@ export default function Header () {
   const [ isShowLoginTypeDialog, setLoginDialogType ] = useState(false)
   const [ isShowLoginDialog, setLoginDialog ] = useState(false)
   const { userState: { isLogin, userInfo }, dispatch, ajax } = useContext(GlobalContext)
-  useEffect(() => {
-    ajax(API.getSearch, '海阔天空')
-    // ajax(API.getUserSubcount)
-    // eslint-disable-next-line no-undef
-  }, [])
+  useEffect(() => {}, [])
   return (
     <React.Fragment>
       <div className={`${style.box} nmsp-range`}>
@@ -61,7 +57,8 @@ export default function Header () {
                     }}>
                     登录
                   </Button>
-                  {isShowLoginTypeDialog && (
+                  {!isLogin &&
+                  isShowLoginTypeDialog && (
                     <Dialog.Follow>
                       <Login.List
                         onClick={(type) => {
@@ -82,13 +79,30 @@ export default function Header () {
       <div className={style.subnav} />
       <button
         onClick={() => {
+          ajax(API.getUserSubcount).then((res) => {
+            console.log(res)
+          })
+        }}>
+        刷新1
+      </button>
+      {/* <button
+        onClick={() => {
+          ajax(API.getSearch, '海阔天空').then((res) => {
+            console.log(res)
+          })
+        }}>
+        刷新2
+      </button> */}
+      <button
+        onClick={() => {
           setCount(count + 1)
           dispatch(setLoginType(!isLogin))
           // getUserSubcount
         }}>
         Click me{count}
       </button>
-      {isShowLoginDialog && (
+      {!isLogin &&
+      isShowLoginDialog && (
         <Dialog.Global>
           <Login
             onClick={(type) => {
