@@ -1,8 +1,9 @@
 import React from 'react'
 import Modal from './modal'
-import noop from '../../config/constant'
+import noop from '../../../config/constant'
 import style from './global.module.css'
-
+import Icon from '../../icon'
+import Button from '../../button'
 /**
  * @module components/dialog/global
  * @desc 相对全局弹框
@@ -20,16 +21,22 @@ export default ({
   level = 'left',
   vertical = 'top',
   onClose = noop,
+  globalClass = '',
+  title = '',
   ...modalProps
 }) => {
   return (
     <Modal
       {...modalProps}
       isShowMask={isShowMask}
-      className={`${style.global} ${level === 'left' ? style.left : style.right} ${vertical === 'top'
-        ? style.top
-        : style.bottom}`}>
-      <div className={style.close} onClick={onClose} />
+      className={`${style.global} ${level === 'left' ? style.left : level === 'right' ? style.right : style.center} 
+        ${vertical === 'top' ? style.top : vertical === 'bottom' ? style.bottom : style.center} ${globalClass}`}>
+      <div className={style.close}>
+        <span className={style.title}>{title}</span>
+        <Button.Text onClick={onClose}>
+          <Icon type='close' className={style.icon_close} />
+        </Button.Text>
+      </div>
       {children}
     </Modal>
   )

@@ -1,0 +1,52 @@
+.main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 40px 0 39px;
+  display: flex;
+  box-sizing: border-box;
+  background: #fff;
+}
+.principal {
+  width: 224px;
+  padding: 0 35px 3px 40px;
+  border-right: 1px dotted #ccc;
+}
+.logo_login {
+  height: 120px;
+  background: url(../../../assets/img/platform.png) no-repeat 13px 0;
+}
+
+.main_btn {
+  margin: 10px 0 0;
+}
+.main_btn_text {
+  width: 100%;
+  text-align: left;
+}
+.auxiliary li:first-child {
+  margin: 0;
+}
+.auxiliary li {
+  margin: 15px 0 0 0;
+}
+.auxiliary {
+  flex-grow: 2;
+  padding: 0 0 0 40px;
+}
+.main_iocn {
+  font-size: 34px;
+  margin: 0 14px 0 0;
+}
+.icon_yi {
+  font-size: 28px;
+  vertical-align: middle;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  text-align: center;
+  line-height: 38px;
+  color: #d75e56;
+}

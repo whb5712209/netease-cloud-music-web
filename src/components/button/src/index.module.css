@@ -1,0 +1,35 @@
+.btn {
+  display: inline-block;
+  overflow: hidden;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn__default {
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ecc2c2;
+}
+.btn__primary {
+  color: #fff;
+  background-color: #387dd0;
+
+  /* box-shadow: 0 4px 0 #387dd0; */
+}
+.btn__normal {
+  font-size: 14px;
+  height: 31px;
+  line-height: 31px;
+}
+.btn__small {
+  font-size: 12px;
+  height: auto;
+}
+.btn__large {
+  font-size: 16px;
+  height: 31px;
+  line-height: 26px;
+  display: inline-block;
+  width: 100%;
+}

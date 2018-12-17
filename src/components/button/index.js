@@ -1,11 +1,5 @@
-import React from 'react'
-
-export default function Button ({ className, children, ...props }) {
-  return (
-    <div className={className}>
-      <button type='text' {...props}>
-        {children}
-      </button>
-    </div>
-  )
-}
+import index from './src/index'
+import text from './src/text'
+const Button = index
+Button.Text = text
+export default Button

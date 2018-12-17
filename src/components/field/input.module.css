@@ -1,0 +1,16 @@
+.inputBox {
+  position: relative;
+  padding: 5px 6px 6px;
+  border: 1px solid #cdcdcd;
+  border-radius: 2px;
+  display: flex;
+}
+.input {
+  height: 19px;
+  margin: 0;
+  border: none;
+  outline: none;
+  line-height: 19px;
+  box-sizing: border-box;
+  flex-grow: 2;
+}

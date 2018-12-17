@@ -1,5 +1,5 @@
 import React from 'react'
-import noop, { getDialogZindex } from '../../config/constant'
+import noop, { getDialogZindex } from '../../../config/constant'
 import style from './modal.module.css'
 /**
  * 基础弹框组件说明
@@ -7,7 +7,7 @@ import style from './modal.module.css'
  * @param  {Boolean} [props.isShowMask] - 背景显示隐藏 true显示/false隐藏
  * @param  {String}  [props.maskClass] - 背景样式
  * @param  {String} [props.className] - 内容样式
- * * @param  {String} [props.boxClass] - 内容样式
+ * @param  {String} [props.boxClass] - 内容样式
  */
 function Modal ({
   isShowMask = true,

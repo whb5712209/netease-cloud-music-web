@@ -1,0 +1,43 @@
+.global {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+.top {
+}
+.left {
+}
+.right {
+}
+.bottom {
+}
+.center {
+}
+.close {
+  border-bottom: 1px solid #191919;
+  border-radius: 4px 4px 0 0;
+  background: #2d2d2d;
+  padding: 0 15px 0 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  height: 38px;
+  line-height: 38px;
+  border-radius: 3px 3px 0 0;
+  font-weight: bold;
+  font-size: 14px;
+  color: #fff;
+  background-position: 50% 0;
+  font-size: 14px;
+  color: #fff;
+}
+.icon_close {
+  color: #fff;
+  font-size: 12px;
+}

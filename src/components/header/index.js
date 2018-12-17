@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import style from './index.module.css'
 import { HeaderList } from '../../config/constant'
-import GlobalContext from '../../store/'
-import { setLoginType } from '../../store/actions/user'
-import API from '../../api/index'
+import GlobalContext, { RouterContext } from '../../store/'
 import Input from '../field/input'
 import Button from '../button'
 import Dialog from '../dialog'
@@ -13,10 +11,11 @@ function login (type) {
   console.log(type)
 }
 export default function Header () {
-  const [ count, setCount ] = useState(1)
   const [ isShowLoginTypeDialog, setLoginDialogType ] = useState(false)
-  const [ isShowLoginDialog, setLoginDialog ] = useState(false)
-  const { userState: { isLogin, userInfo }, dispatch, ajax } = useContext(GlobalContext)
+  const [ loginTypeDialog, setLoginTypeDialog ] = useState(0)
+  const { userState: { isLogin, userInfo } } = useContext(GlobalContext)
+  // const context = useContext(RouterContext)
+  // console.log(context)
   useEffect(() => {}, [])
   return (
     <React.Fragment>
@@ -49,67 +48,51 @@ export default function Header () {
             <div>
               {isLogin && <div className={style.nickname}>{userInfo.profile.nickname}</div>}
               {!isLogin && (
-                <React.Fragment>
-                  <Button
+                <div
+                  onMouseEnter={() => {
+                    console.log(isShowLoginTypeDialog)
+                    !isLogin && !isShowLoginTypeDialog && setLoginDialogType(true)
+                  }}
+                  onMouseLeave={() => {
+                    !isLogin && isShowLoginTypeDialog && setLoginDialogType(false)
+                  }}>
+                  <Button.Text
                     className={style.login_btn}
                     onClick={() => {
                       setLoginDialogType(!isShowLoginTypeDialog)
                     }}>
                     登录
-                  </Button>
+                  </Button.Text>
                   {!isLogin &&
                   isShowLoginTypeDialog && (
-                    <Dialog.Follow>
+                    <Dialog.Follow followClass={style.follow}>
                       <Login.List
                         onClick={(type) => {
-                          if (type === 0) {
-                            setLoginDialog(!isShowLoginDialog)
-                            setLoginDialogType(!isShowLoginTypeDialog)
-                          }
+                          setLoginTypeDialog(type)
+                          setLoginDialogType(!isShowLoginTypeDialog)
                         }}
                       />
                     </Dialog.Follow>
                   )}
-                </React.Fragment>
+                </div>
               )}
             </div>
           </div>
         </div>
       </div>
       <div className={style.subnav} />
-      <button
-        onClick={() => {
-          ajax(API.getUserSubcount).then((res) => {
-            console.log(res)
-          })
-        }}>
-        刷新1
-      </button>
-      {/* <button
-        onClick={() => {
-          ajax(API.getSearch, '海阔天空').then((res) => {
-            console.log(res)
-          })
-        }}>
-        刷新2
-      </button> */}
-      <button
-        onClick={() => {
-          setCount(count + 1)
-          dispatch(setLoginType(!isLogin))
-          // getUserSubcount
-        }}>
-        Click me{count}
-      </button>
+
       {!isLogin &&
-      isShowLoginDialog && (
-        <Dialog.Global>
-          <Login
-            onClick={(type) => {
-              login()
-            }}
-          />
-        </Dialog.Global>
+      loginTypeDialog && (
+        <Login.Main
+          type={loginTypeDialog}
+          onClose={() => {
+            setLoginTypeDialog(0)
+          }}
+          onClick={(type) => {
+            login()
+          }}
+        />
       )}
     </React.Fragment>
   )

@@ -6,7 +6,7 @@ const ajaxType = { fetch: fetch }
 const shortcut = {}
 function getSimple (type) {
   methodList.forEach((item) => {
-    shortcut[item] = shortcut[item] = (url, data, opt = {}) => {
+    shortcut[item] = (url, data, opt = {}) => {
       const _opt = assemble(
         {
           url,

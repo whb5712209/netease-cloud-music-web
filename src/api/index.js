@@ -4,9 +4,11 @@ export default {
   async getSearch (data) {
     return get('search', { keywords: data })
   },
-  async login (data) {
-    // const url = getPrefix() + 'login/cellphone'
+  async loginByPhone (data) {
     return get('login/cellphone', data)
+  },
+  async login (data) {
+    return get('login', data)
   },
   async getUserSubcount () {
     return get('user/subcount')

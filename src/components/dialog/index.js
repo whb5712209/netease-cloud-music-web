@@ -1,5 +1,5 @@
-import follow from './follow'
-import global from './global'
+import follow from './src/follow'
+import global from './src/global'
 const Dialog = {}
 Dialog.Follow = follow
 Dialog.Global = global

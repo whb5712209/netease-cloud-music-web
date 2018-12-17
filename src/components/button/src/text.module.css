@@ -1,0 +1,7 @@
+.btn_text {
+  outline: none;
+  cursor: pointer;
+  background: inherit;
+  color: inherit;
+  border: none;
+}
