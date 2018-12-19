@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 import style from './login.module.css'
 import Login from '../../components/login/'
-export default ({ history, location }) => {
-  console.log(history, location)
+import Container from '../../components/container'
+export default () => {
   const [ loginTypeDialog, setLoginTypeDialog ] = useState(0)
-
   return (
-    <div className={style.login}>
+    <Container>
       <h1 className={style.hd}>请用你的云音乐帐号登录</h1>
       <div className={style.lg}>
         <Login.Home
@@ -23,6 +22,6 @@ export default ({ history, location }) => {
           }}
         />
       )}
-    </div>
+    </Container>
   )
 }

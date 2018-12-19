@@ -1,0 +1,32 @@
+.box {
+  position: relative;
+  width: 100%;
+  background-color: #c20c0c;
+  border-bottom: 1px solid #a40011;
+  height: 35px;
+}
+.ul {
+  padding: 0 0 0 180px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.li {
+  margin: 0 17px;
+}
+.em {
+  color: #fff;
+  padding: 0 13px;
+  font-size: 12px;
+  border-radius: 20px;
+  line-height: 25px;
+  height: 25px;
+}
+.active .em {
+  background: #9b0909;
+}
+.a {
+  text-decoration: none;
+  outline: none;
+}

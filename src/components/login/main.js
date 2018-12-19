@@ -16,6 +16,7 @@ const titleList = {
 }
 export default ({ type = 1, onSave, onClose }) => {
   const { dispatch, ajax, history } = useContext(GlobalContext)
+
   const [ loginType, setLoginType ] = useState(type)
   console.log(history)
   return (
@@ -30,6 +31,7 @@ export default ({ type = 1, onSave, onClose }) => {
                     .then((data) => {
                       dispatch(setUserInfo(data))
                       onClose()
+                      history.push({ pathname: '/discover' })
                     })
                     .catch((error) => {
                       console.error(error)
@@ -44,6 +46,7 @@ export default ({ type = 1, onSave, onClose }) => {
                   ajax(API.login, { email, password: pwd })
                     .then((data) => {
                       dispatch(setUserInfo(data))
+                      history.push({ pathname: '/discover' })
                       onClose()
                     })
                     .catch((error) => {

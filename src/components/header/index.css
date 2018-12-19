@@ -1,8 +1,0 @@
-@component-namespace nmsp {
-  @component range {
-    color: red;
-    position: relative;
-    display: flex;
-    height: 30px;
-  }
-}
