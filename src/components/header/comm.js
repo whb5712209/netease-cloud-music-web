@@ -7,9 +7,6 @@ import Button from '../button'
 import Dialog from '../dialog'
 import Login from '../login'
 
-function login (type) {
-  console.log(type)
-}
 export default function Header () {
   const [ isShowLoginTypeDialog, setLoginDialogType ] = useState(false)
   const [ loginTypeDialog, setLoginTypeDialog ] = useState(0)
@@ -78,16 +75,12 @@ export default function Header () {
         </div>
       </div>
       <div className={style.subnav} />
-
       {!isLogin &&
-      loginTypeDialog && (
+      loginTypeDialog !== 0 && (
         <Login.Main
           type={loginTypeDialog}
           onClose={() => {
             setLoginTypeDialog(0)
-          }}
-          onClick={(type) => {
-            login()
           }}
         />
       )}
