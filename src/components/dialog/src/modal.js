@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import noop, { getDialogZindex } from '../../../config/constant'
 import style from './modal.module.css'
 /**
@@ -9,33 +9,35 @@ import style from './modal.module.css'
  * @param  {String} [props.className] - 内容样式
  * @param  {String} [props.boxClass] - 内容样式
  */
-function Modal ({
-  isShowMask = true,
-  boxClass = '',
-  contentStyle = {},
-  className = '',
-  maskClass = '',
-  children,
-  clickMask = noop
-}) {
-  let maskStyle = {}
-  let _contentStyle = { ...contentStyle }
-  if (isShowMask) {
-    maskStyle = {
+export default memo(
+  ({
+    isShowMask = true,
+    boxClass = '',
+    contentStyle = {},
+    className = '',
+    maskClass = '',
+    children,
+    clickMask = noop
+  }) => {
+    let maskStyle = {}
+    let _contentStyle = { ...contentStyle }
+    if (isShowMask) {
+      maskStyle = {
+        zIndex: getDialogZindex()
+      }
+    }
+    _contentStyle = {
       zIndex: getDialogZindex()
     }
-  }
-  _contentStyle = {
-    zIndex: getDialogZindex()
-  }
-  return (
-    <div className={`${style.modal} ${boxClass}`}>
-      {isShowMask ? <div className={`${style.modal_mask} ${maskClass}`} onClick={clickMask} style={maskStyle} /> : null}
-      <div className={`${style.modal_content} ${className}`} style={_contentStyle}>
-        {children}
+    return (
+      <div className={`${style.modal} ${boxClass}`}>
+        {isShowMask ? (
+          <div className={`${style.modal_mask} ${maskClass}`} onClick={clickMask} style={maskStyle} />
+        ) : null}
+        <div className={`${style.modal_content} ${className}`} style={_contentStyle}>
+          {children}
+        </div>
       </div>
-    </div>
-  )
-}
-
-export default Modal
+    )
+  }
+)

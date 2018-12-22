@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 import Button from '../../button'
 import Input from '../../field/input'
 
 import style from './phone.module.css'
 
-export default ({ onSave }) => {
+export default memo(({ onSave }) => {
   const [ phone, setPhone ] = useState('')
   const [ pwd, setPwd ] = useState('')
   return (
@@ -41,4 +41,4 @@ export default ({ onSave }) => {
       </div>
     </div>
   )
-}
+})

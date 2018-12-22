@@ -99,6 +99,10 @@
   background: #2b2b2b;
   border-radius: 4px;
 }
+.box .follow_user {
+  top: -1px;
+  left: 0px;
+}
 .box .login_btn {
   background-color: initial;
   color: #787878;

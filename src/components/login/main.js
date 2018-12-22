@@ -18,7 +18,6 @@ export default ({ type = 1, onSave, onClose }) => {
   const { dispatch, history, ajax } = useContext(GlobalContext)
 
   const [ loginType, setLoginType ] = useState(type)
-  console.log(history)
   return (
     <Dialog.Global title={loginType === -1 ? '登录' : titleList[loginType]} globalClass={style.box} onClose={onClose}>
       {((_type) => {

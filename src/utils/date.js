@@ -11,7 +11,6 @@
  */
 export function getDateStr (date, format) {
   if (!(date instanceof Date)) {
-    console.log(date)
     throw new Error('date is required')
   }
   const _dateStr = date.toString() //浏览器时间字符串

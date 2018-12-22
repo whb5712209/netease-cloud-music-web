@@ -4,4 +4,5 @@
   background: inherit;
   color: inherit;
   border: none;
+  word-break: keep-all;
 }

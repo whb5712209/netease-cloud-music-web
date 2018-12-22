@@ -1,6 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import '../../assets/font/iconfont.css'
 import style from './index.module.css'
-export default ({ type, className }) => {
-  return <i className={`iconfont icon-${type} ${style.iconfont} ${className}`} />
-}
+export default memo(({ type, className }) => <i className={`iconfont icon-${type} ${style.iconfont} ${className}`} />)

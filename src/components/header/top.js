@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 import style from './top.module.css'
 
-export default () => {
+export default memo(() => {
   return (
     <div className={`${style.box}`}>
       <div className='ncmw-wrap'>
@@ -41,4 +41,4 @@ export default () => {
       </div>
     </div>
   )
-}
+})

@@ -1,38 +1,46 @@
-import React, { useContext } from 'react'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import React, { useContext, lazy, Suspense } from 'react'
+import { Router, Route, Switch, Redirect } from 'react-router-dom'
 import GlobalContext from '../store/'
 
-import Discover from '../pages/discover'
+import Header from '../components/header'
+import Aside from '../components/aside'
+
+import Discover from '../pages/discover/home'
 import Login from '../pages/discover/login'
 
-import Album from '../pages/discover/album'
-import Artist from '../pages/discover/artist'
-import DjRadio from '../pages/discover/djRadio'
-import PlayList from '../pages/discover/playList'
-import TopList from '../pages/discover/topList'
+const Album = lazy(() => import('../pages/discover/album'))
+const Artist = lazy(() => import('../pages/discover/artist'))
+const DjRadio = lazy(() => import('../pages/discover/djRadio'))
+const PlayList = lazy(() => import('../pages/discover/playList'))
+const TopList = lazy(() => import('../pages/discover/topList'))
 
-import BusinessError from '../pages/auxiliary/businessError'
-import ServerError from '../pages/auxiliary/serverError'
-import WebError from '../pages/auxiliary/webError'
+const BusinessError = lazy(() => import('../pages/auxiliary/businessError'))
+const ServerError = lazy(() => import('../pages/auxiliary/serverError'))
+const WebError = lazy(() => import('../pages/auxiliary/webError'))
 
-import UserHome from '../pages/user/home'
-import UserMessage from '../pages/user/message'
-import UserLevel from '../pages/user/level'
+const UserHome = lazy(() => import('../pages/user/home'))
+const UserMessage = lazy(() => import('../pages/user/message'))
+const UserLevel = lazy(() => import('../pages/user/level'))
 
-export default () => (
-  <Router>
-    <div>
-      <Switch>
-        <Route exact path='/' component={Discover} />
-        <Route path='/discover' component={HomeCommonent} />
-        <LoginRoute path='/login' component={Login} />
-        <Route path='/user' component={UserCommonent} />
-        <Route path='/error' component={ErrorComponent} />
-        <Route path='*' component={WebError} />
-      </Switch>
-    </div>
-  </Router>
-)
+export default () => {
+  const { history } = useContext(GlobalContext)
+  return (
+    <Router basename='/' history={history}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Header />
+        <Aside />
+        <Switch>
+          <Route exact path='/' component={Discover} />
+          <Route path='/discover' component={HomeCommonent} />
+          <LoginRoute path='/login' component={Login} />
+          <Route path='/user' component={UserCommonent} />
+          <Route path='/error' component={ErrorComponent} />
+          <Route path='*' component={WebError} />
+        </Switch>
+      </Suspense>
+    </Router>
+  )
+}
 /**
  * 用户私有路由
  */

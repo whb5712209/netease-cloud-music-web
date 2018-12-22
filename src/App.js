@@ -1,6 +1,5 @@
 import React, { useReducer } from 'react'
 import Router from './router'
-import Header from './components/header'
 import userReducer, { initialState as userInitialState } from './store/reducers/user'
 import globalReducer, { initialState as globalInitialState } from './store/reducers/user'
 
@@ -11,7 +10,9 @@ import GlobalContext from './store'
 import './App.css'
 import './assets/css/global.css'
 const history = createHashHistory()
-
+history.listen((location, action) => {
+  console.log(action, location)
+})
 export default function App () {
   const [ userState, userDispatch ] = useReducer(userReducer, userInitialState)
   const [ globaltate, globalDispatch ] = useReducer(globalReducer, globalInitialState)
@@ -25,10 +26,10 @@ export default function App () {
       }
     }
   })
+
   return (
     <GlobalContext.Provider
       value={{ userState, globaltate, history, globalDispatch: globalDispatch, dispatch: dispatchProxy, ajax }}>
-      <Header />
       <Router />
     </GlobalContext.Provider>
   )

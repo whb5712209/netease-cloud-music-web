@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Button from '../../button'
 import Icon from '../../icon'
 import style from './home.module.css'
 
-export default ({ onClick }) => {
+export default memo(({ onClick }) => {
   return (
     <div className={style.main}>
       <div className={style.principal}>
@@ -59,4 +59,4 @@ export default ({ onClick }) => {
       </ul>
     </div>
   )
-}
+})

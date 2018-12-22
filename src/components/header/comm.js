@@ -6,9 +6,11 @@ import Input from '../field/input'
 import Button from '../button'
 import Dialog from '../dialog'
 import Login from '../login'
+import User from '../user'
 
-export default function Header () {
+export default () => {
   const [ isShowLoginTypeDialog, setLoginDialogType ] = useState(false)
+  const [ isShowUserListDialog, setUserListDialogType ] = useState(false)
   const [ loginTypeDialog, setLoginTypeDialog ] = useState(0)
   const { userState: { isLogin, userInfo } } = useContext(GlobalContext)
   return (
@@ -40,7 +42,24 @@ export default function Header () {
               视频征集
             </a>
             <div>
-              {isLogin && <div className={style.nickname}>{userInfo.profile.nickname}</div>}
+              {isLogin && (
+                <div
+                  className={style.nickname}
+                  onMouseEnter={() => {
+                    isLogin && !isShowUserListDialog && setUserListDialogType(true)
+                  }}
+                  onMouseLeave={() => {
+                    isLogin && isShowUserListDialog && setUserListDialogType(false)
+                  }}>
+                  {userInfo.profile.nickname}
+                  {isLogin &&
+                  isShowUserListDialog && (
+                    <Dialog.Follow followClass={`${style.follow} ${style.follow_user}`}>
+                      <User.List id={userInfo.profile.userId} />
+                    </Dialog.Follow>
+                  )}
+                </div>
+              )}
               {!isLogin && (
                 <div
                   onMouseEnter={() => {

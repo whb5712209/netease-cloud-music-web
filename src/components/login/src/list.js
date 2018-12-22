@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Button from '../../button'
 
 import style from './list.module.css'
 
-export default ({ onClick }) => {
+export default memo(({ onClick }) => {
   return (
     <div className={style.box}>
       <div className='inner'>
@@ -30,4 +30,4 @@ export default ({ onClick }) => {
       </div>
     </div>
   )
-}
+})

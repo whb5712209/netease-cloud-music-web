@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 import style from './input.module.css'
 
-export default function Input ({ Prefix = null, disabled = false, Suffix = null, className = '', ...props }) {
+export default memo(({ Prefix = null, disabled = false, Suffix = null, className = '', ...props }) => {
   return (
     <div className={`${style.inputBox} ${className}`}>
       {Prefix && <Prefix.type {...Prefix.props} />}
@@ -9,4 +9,4 @@ export default function Input ({ Prefix = null, disabled = false, Suffix = null,
       {Suffix && <Suffix.type {...Suffix.props} />}
     </div>
   )
-}
+})

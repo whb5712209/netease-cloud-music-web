@@ -1,0 +1,29 @@
+.box {
+  word-break: keep-all;
+}
+.ltb {
+  min-width: 130px;
+  color: #fff;
+  text-align: center;
+}
+.link {
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+  margin: 10px 20px;
+  display: inline-block;
+  font-size: 14px;
+}
+
+.box .text_btn:hover,
+.link:hover {
+  background: #353535;
+  text-decoration: none;
+  color: #fff;
+}
+.box .text_btn {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
