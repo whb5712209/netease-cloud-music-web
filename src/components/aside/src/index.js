@@ -16,16 +16,13 @@ function scrollToTop (visible, setVisible) {
 }
 export default memo(() => {
   const [ visible, setVisible ] = useState(false)
-  useEffect(
-    () => {
-      const _scrollToTop = throttle(scrollToTop.bind(this, visible, setVisible))
-      window.addEventListener('scroll', _scrollToTop)
-      return () => {
-        window.removeEventListener('scroll', _scrollToTop)
-      }
-    },
-    [ visible ]
-  )
+  useEffect(() => {
+    const _scrollToTop = throttle(scrollToTop.bind(this, visible, setVisible))
+    window.addEventListener('scroll', _scrollToTop)
+    return () => {
+      window.removeEventListener('scroll', _scrollToTop)
+    }
+  }, [])
 
   return <aside className={`${style.m_back} ${visible ? '' : style.none}`}>top</aside>
 })

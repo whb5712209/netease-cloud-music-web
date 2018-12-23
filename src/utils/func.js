@@ -16,8 +16,8 @@ export function throttle (fn, interval = 300) {
 }
 /**
  * 函数防抖
- * @param {*} fn 放入需要放到防抖的函数
- * @param {*} interval 毫秒数
+ * @param {Function} fn 放入需要放到防抖的函数
+ * @param {Int} interval 毫秒数
  */
 export function debounce (fn, interval = 300) {
   let timeout = null

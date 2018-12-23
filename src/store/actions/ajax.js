@@ -1,5 +1,7 @@
 export const REQUEST_TYPE = 'REQUEST_START'
 
+export const URL_MATCH = 'URL_MATCH'
+
 export default function ajax (ajaxFunc, params, sucCallback, failCallback) {
   return (dispatch) => {
     return ajaxFunc(params).then(

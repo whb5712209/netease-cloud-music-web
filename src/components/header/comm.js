@@ -12,7 +12,7 @@ export default () => {
   const [ isShowLoginTypeDialog, setLoginDialogType ] = useState(false)
   const [ isShowUserListDialog, setUserListDialogType ] = useState(false)
   const [ loginTypeDialog, setLoginTypeDialog ] = useState(0)
-  const { userState: { isLogin, userInfo } } = useContext(GlobalContext)
+  const { state: { user: { userInfo, isLogin } } } = useContext(GlobalContext)
   return (
     <React.Fragment>
       <div className={`${style.box} nmsp-range`}>

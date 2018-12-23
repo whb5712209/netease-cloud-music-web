@@ -1,15 +1,13 @@
-import * as acts from '../actions/index'
+import combineReducers from '../../utils/combineReducers'
+import ajax, { initialState as ajaxState } from './ajax'
+import user, { initialState as userState } from './user'
 
-export const initialState = {
-  request: 0
-}
-export default (state, action) => {
-  switch (action.type) {
-    case acts.REQUEST_TYPE:
-      return Object.assign({}, state, {
-        request: action.data
-      })
-    default:
-      return state
-  }
+const rootReducer = combineReducers({
+  ajax,
+  user
+})
+export default rootReducer
+export const initState = {
+  user: userState,
+  ajax: ajaxState
 }

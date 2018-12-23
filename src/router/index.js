@@ -1,4 +1,4 @@
-import React, { useContext, lazy, Suspense } from 'react'
+import React, { useContext, lazy, Suspense, memo } from 'react'
 import { Router, Route, Switch, Redirect } from 'react-router-dom'
 import GlobalContext from '../store/'
 
@@ -21,8 +21,7 @@ const WebError = lazy(() => import('../pages/auxiliary/webError'))
 const UserHome = lazy(() => import('../pages/user/home'))
 const UserMessage = lazy(() => import('../pages/user/message'))
 const UserLevel = lazy(() => import('../pages/user/level'))
-
-export default () => {
+export default memo(() => {
   const { history } = useContext(GlobalContext)
   return (
     <Router basename='/' history={history}>
@@ -40,17 +39,17 @@ export default () => {
       </Suspense>
     </Router>
   )
-}
+})
 /**
  * 用户私有路由
  */
 const PrivateUserRoute = ({ component: Component, ...rest }) => {
-  const { userState: { isLogin } } = useContext(GlobalContext)
+  const { state: { user: { isLogin } } } = useContext(GlobalContext)
   return (
     <Route
       {...rest}
       render={(props) => {
-        return isLogin ? <Component /> : <Redirect to='/login' />
+        return isLogin ? <Component {...props} /> : <Redirect to='/login' />
       }}
     />
   )
@@ -60,7 +59,7 @@ const PrivateUserRoute = ({ component: Component, ...rest }) => {
  * 登录路由,已登录用户无法进入
  */
 const LoginRoute = ({ component: Component, ...rest }) => {
-  const { userState: { isLogin } } = useContext(GlobalContext)
+  const { state: { user: { isLogin } } } = useContext(GlobalContext)
   return (
     <Route
       {...rest}
