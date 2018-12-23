@@ -9,13 +9,15 @@ import API from '../../api/index'
 
 import GlobalContext from '../../store'
 import { setUserInfo } from '../../store/actions/user'
+import ajax from '../../store/actions/ajax'
+
 import style from './main.module.css'
 const titleList = {
   1: '手机号码登录',
   2: '网易账户登录'
 }
 export default ({ type = 1, onSave, onClose }) => {
-  const { dispatch, history, ajax } = useContext(GlobalContext)
+  const { dispatch, history } = useContext(GlobalContext)
 
   const [ loginType, setLoginType ] = useState(type)
   return (

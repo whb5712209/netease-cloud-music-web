@@ -3,7 +3,7 @@ import * as acts from '../actions/ajax'
 export const initialState = {
   request: 0
 }
-export default (state, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
     case acts.REQUEST_TYPE:
       return Object.assign({}, state, {

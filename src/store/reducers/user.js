@@ -5,7 +5,7 @@ export const initialState = {
   userInfo: userInfoCache,
   isLogin: !!userInfoCache
 }
-export default (state, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
     case userActs.USER_INFO:
       saveData('userInfo', action.data)

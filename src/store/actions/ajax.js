@@ -11,7 +11,7 @@ export default function ajax (ajaxFunc, params, sucCallback, failCallback) {
       },
       (data) => {
         failCallback && failCallback(data)
-        return data
+        return Promise.reject(data)
       }
     )
   }
