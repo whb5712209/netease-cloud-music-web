@@ -1,0 +1,103 @@
+.info-tosat {
+  padding: 7px 20px 7px 10px;
+  border-radius: 3px 3px;
+  border: 1px solid #999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border: 0px solid rgba(0, 0, 0, 0);
+  background: #fff;
+  width: auto;
+  line-height: 1.5;
+  position: relative;
+  margin: 10px 0;
+}
+.info-tosat .info-content {
+  color: #666;
+}
+.info-tosat .info-closable {
+  padding-right: 20px;
+}
+.info-tosat .info-close {
+  position: absolute;
+  right: 5px;
+  top: 3px;
+  color: #000;
+  cursor: pointer;
+  outline: none;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: .2;
+  text-decoration: none;
+}
+.info-tosat .info-x-close::after {
+  content: '\D7';
+}
+
+.success-tosat {
+  padding: 7px 20px 7px 10px;
+  border-radius: 3px 3px;
+  border: 1px solid #999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: auto;
+  line-height: 1.5;
+  position: relative;
+  margin: 10px 0;
+  background-color: #f0f9eb;
+  border-color: #e1f3d8;
+}
+.success-tosat .success-content {
+  color: #67c23a;
+}
+
+.success-tosat .success-x-close ::after {
+  content: '\D7';
+  color: #67c23a;
+}
+.error-tosat {
+  padding: 7px 20px 7px 10px;
+  border-radius: 3px 3px;
+  border: 1px solid #999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: auto;
+  line-height: 1.5;
+  position: relative;
+  margin: 10px 0;
+  background-color: #fef0f0;
+  border-color: #fde2e2;
+}
+.error-tosat .error-content {
+  color: #f56c6c;
+}
+
+.error-tosat .error-x-close ::after {
+  content: '\D7';
+  color: #f56c6c;
+}
+.warn-tosat {
+  padding: 7px 20px 7px 10px;
+  border-radius: 3px 3px;
+  border: 1px solid #999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: auto;
+  line-height: 1.5;
+  position: relative;
+  margin: 10px 0;
+  background-color: #fdf6ec;
+  border-color: #faecd8;
+}
+.warn-tosat .warn-content {
+  color: #e6a23c;
+}
+
+.warn-tosat .warn-x-close ::after {
+  content: '\D7';
+  color: #e6a23c;
+}
+.message-box {
+  position: fixed;
+  top: 65px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}

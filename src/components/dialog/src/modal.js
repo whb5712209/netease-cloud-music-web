@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import noop, { getDialogZindex } from '../../../config/constant'
+import noop, { zIndex } from '../../../config/constant'
 import style from './modal.module.css'
 /**
  * 基础弹框组件说明
@@ -23,11 +23,11 @@ export default memo(
     let _contentStyle = { ...contentStyle }
     if (isShowMask) {
       maskStyle = {
-        zIndex: getDialogZindex()
+        zIndex: zIndex.getZIndex()
       }
     }
     _contentStyle = {
-      zIndex: getDialogZindex()
+      zIndex: zIndex.getZIndex()
     }
     return (
       <div className={`${style.modal} ${boxClass}`}>

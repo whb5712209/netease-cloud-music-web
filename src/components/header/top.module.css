@@ -20,8 +20,9 @@
   padding: 0 13px;
   font-size: 12px;
   border-radius: 20px;
-  line-height: 25px;
-  height: 25px;
+  line-height: 21px;
+  height: 21px;
+  display: block;
 }
 .active .em {
   background: #9b0909;

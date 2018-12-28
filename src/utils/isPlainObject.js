@@ -15,11 +15,11 @@ function getTag (value) {
 }
 
 function isObjectLike (value) {
-  return typeof value == 'object' && value !== null
+  return typeof value === 'object' && value !== null
 }
 
 function isPlainObject (value) {
-  if (!isObjectLike(value) || getTag(value) != '[object Object]') {
+  if (!isObjectLike(value) || getTag(value) !== '[object Object]') {
     return false
   }
   if (Object.getPrototypeOf(value) === null) {

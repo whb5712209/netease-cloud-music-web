@@ -4,3 +4,13 @@ export function getScrollingElement () {
     ? d.documentElement
     : d.body
 }
+
+export function getDom (id) {
+  let dom = document.querySelector(`#${id}`)
+  if (!dom) {
+    dom = document.createElement('div')
+    dom.setAttribute('id', id)
+    document.body.appendChild(dom)
+  }
+  return dom
+}
