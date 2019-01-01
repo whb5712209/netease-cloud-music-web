@@ -1,4 +1,5 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useCallback } from 'react'
+import useToastTime from '../../../hooks/useTimeOut'
 import styles from './toast.module.css'
 
 function getClassNames (prefixCls) {
@@ -20,34 +21,13 @@ function getClassNames (prefixCls) {
 }
 export default memo(
   ({ closable = true, duration = 1.5, prefixCls, onClose, children, closeIcon, toastId, onClick }) => {
-    useEffect(
-      () => {
-        restartCloseTimer()
-      },
-      [ duration ]
-    )
-    let closeTimer = ''
-    const clearCloseTimer = () => {
-      if (closeTimer) {
-        clearTimeout(closeTimer)
-        closeTimer = ''
-      }
-    }
-    const startCloseTimer = () => {
-      if (duration) {
-        closeTimer = setTimeout(() => {
-          close()
-        }, duration * 1000)
-      }
-    }
-    const close = () => {
+    const [ startCloseTimer, clearCloseTimer ] = useToastTime(() => {
+      close()
+    }, duration)
+    const close = useCallback(() => {
       clearCloseTimer()
       onClose(toastId)
-    }
-    const restartCloseTimer = () => {
-      clearCloseTimer()
-      startCloseTimer()
-    }
+    })
     const classNames = getClassNames(prefixCls)
     return (
       <div

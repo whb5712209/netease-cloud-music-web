@@ -25,10 +25,16 @@ export const HeaderList = [
   }
 ]
 export const initDialogZindex = 10000
-export const getDialogZindex = (function getZIndexByDialog () {
-  let zIndex = initDialogZindex
-  return function getZIndex () {
-    return zIndex++
+export const zIndex = (function getZIndexByDialog () {
+  let _zIndex = initDialogZindex
+  return {
+    getZIndex: function () {
+      return ++_zIndex
+    },
+    getCurZIndex: function () {
+      return _zIndex
+    }
   }
 })()
+
 export default function noop () {}

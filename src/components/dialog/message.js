@@ -101,17 +101,17 @@ function MessageBox ({ style, list, callback }) {
     </div>
   )
 }
-export const message = Message.getMessage(getDom)()
-console.log(message)
+export const ToastMsg = Message.getMessage(getDom)
 ;[ 'success', 'warn', 'info', 'error' ].forEach((item) => {
+  const toastMsg = ToastMsg()
   Message[item] = (options) => {
     if (typeof options === 'string') {
-      return message.add({
+      return toastMsg.add({
         type: item,
         content: options
       })
     } else {
-      return message.add({
+      return toastMsg.add({
         type: item,
         ...options
       })
