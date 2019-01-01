@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useCallback, useMemo, useContext } from 'react'
 import Dialog from '../dialog'
 import Button from '../button'
 import Phone from './src/phone'
@@ -18,44 +18,26 @@ const titleList = {
 }
 export default ({ type = 1, onSave, onClose }) => {
   const { dispatch, history } = useContext(GlobalContext)
-
   const [ loginType, setLoginType ] = useState(type)
-  return (
-    <Dialog.Global title={loginType === -1 ? '登录' : titleList[loginType]} globalClass={style.box} onClose={onClose}>
-      {((_type) => {
-        switch (_type) {
+  const onLoginByPhone = useCallback(({ phone, pwd }) => {
+    dispatch(ajax(API.loginByPhone, { phone, password: pwd }))
+      .then((data) => {
+        dispatch(setUserInfo(data))
+        onClose()
+        history.push({ pathname: '/discover' })
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  })
+  const LoginContainer = useMemo(
+    () => {
+      const LoginElement = ((type) => {
+        switch (type) {
           case 1:
-            return (
-              <Phone
-                onSave={({ phone, pwd }) => {
-                  dispatch(ajax(API.loginByPhone, { phone, password: pwd }))
-                    .then((data) => {
-                      dispatch(setUserInfo(data))
-                      onClose()
-                      history.push({ pathname: '/discover' })
-                    })
-                    .catch((error) => {
-                      console.error(error)
-                    })
-                }}
-              />
-            )
+            return <Phone onSave={onLoginByPhone} />
           case 2:
-            return (
-              <Email
-                onSave={({ email, pwd }) => {
-                  dispatch(ajax(API.loginByPhone, { email, password: pwd }))
-                    .then((data) => {
-                      dispatch(setUserInfo(data))
-                      onClose()
-                      history.push({ pathname: '/discover' })
-                    })
-                    .catch((error) => {
-                      console.error(error)
-                    })
-                }}
-              />
-            )
+            return <Email onSave={onLoginByEmail} />
           default:
             return (
               <Home
@@ -65,19 +47,42 @@ export default ({ type = 1, onSave, onClose }) => {
               />
             )
         }
-      })(loginType)}
-      {loginType !== -1 && (
-        <footer className={style.footer}>
-          <Button.Text
-            className={style.btn_box}
-            onClick={() => {
-              setLoginType(-1)
-            }}>
-            <Icon type='back' className={style.icon_back} />
-            其他登录方式
-          </Button.Text>
-        </footer>
-      )}
+      })(loginType)
+      return (
+        <React.Fragment>
+          {LoginElement}
+          {loginType !== -1 && (
+            <footer className={style.footer}>
+              <Button.Text
+                className={style.btn_box}
+                onClick={() => {
+                  setLoginType(-1)
+                }}>
+                <Icon type='back' className={style.icon_back} />
+                其他登录方式
+              </Button.Text>
+            </footer>
+          )}
+        </React.Fragment>
+      )
+    },
+    [ loginType ]
+  )
+  const onLoginByEmail = useCallback(({ email, pwd }) => {
+    dispatch(ajax(API.login, { email, password: pwd }))
+      .then((data) => {
+        dispatch(setUserInfo(data))
+        onClose()
+        history.push({ pathname: '/discover' })
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  })
+  return (
+    <Dialog.Global title={loginType === -1 ? '登录' : titleList[loginType]} globalClass={style.box} onClose={onClose}>
+      {LoginContainer}
+      {}
     </Dialog.Global>
   )
 }

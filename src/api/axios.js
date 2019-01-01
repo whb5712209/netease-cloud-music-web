@@ -31,7 +31,6 @@ axios.interceptors.response.use(
     return success(response.data)
   },
   (err) => {
-    debugger
     return Promise.reject(error(err))
   }
 )

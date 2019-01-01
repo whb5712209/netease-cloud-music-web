@@ -12,5 +12,11 @@ export default {
   },
   async getUserSubcount () {
     return get('user/subcount')
+  },
+  async getPersonalized (data) {
+    return get('personalized', data)
+  },
+  async getTopAlbum (data) {
+    return get('top/album', data)
   }
 }

@@ -3,7 +3,7 @@ import Button from '../../button'
 import Input from '../../field/input'
 import style from './email.module.css'
 export default memo(({ onSave }) => {
-  const [ phone, setPhone ] = useState('')
+  const [ email, setEmail ] = useState('')
   const [ pwd, setPwd ] = useState('')
   return (
     <div className={style.box}>
@@ -13,7 +13,7 @@ export default memo(({ onSave }) => {
             type='text'
             placeholder='请输入账户号'
             onChange={(e) => {
-              setPhone(e.target.value)
+              setEmail(e.target.value)
             }}
           />
         </div>
@@ -31,7 +31,7 @@ export default memo(({ onSave }) => {
             type='primary'
             size='large'
             onClick={() => {
-              onSave({ phone, pwd })
+              onSave({ email, pwd })
             }}>
             登录
           </Button>
