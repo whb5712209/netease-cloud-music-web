@@ -11,3 +11,8 @@
  ### `npm start`
 
 启动项目
+
+3. hooks资料收集
+   > [官方介绍](https://reactjs.org/docs/hooks-intro.html)
+   > [油管react开发者大会](https://www.youtube.com/watch?v=ZXqyaslyXUw)
+   > [一篇看懂 React Hooks,黄大神力作](https://github.com/ascoders/blog/issues/29)

@@ -1,38 +1,25 @@
-import React, { useState, memo } from 'react'
+import React, { memo, useCallback } from 'react'
 import Button from '../../button'
 import Input from '../../field/input'
 import style from './email.module.css'
+import useInputValue from '../../../hooks/useInputValue'
 export default memo(({ onSave }) => {
-  const [ email, setEmail ] = useState('')
-  const [ pwd, setPwd ] = useState('')
+  const [ email, setEmail ] = useInputValue('')
+  const [ pwd, setPwd ] = useInputValue('')
+  const onLogin = useCallback(() => {
+    onSave({ email, pwd })
+  })
   return (
     <div className={style.box}>
       <div className={style.context}>
         <div className={style.item}>
-          <Input
-            type='text'
-            placeholder='请输入账户号'
-            onChange={(e) => {
-              setEmail(e.target.value)
-            }}
-          />
+          <Input type='text' placeholder='请输入账户号' onChange={setEmail} />
         </div>
         <div className={style.item}>
-          <Input
-            type='password'
-            placeholder='请输入密码'
-            onChange={(e) => {
-              setPwd(e.target.value)
-            }}
-          />
+          <Input type='password' placeholder='请输入密码' onChange={setPwd} />
         </div>
         <div className={style.item}>
-          <Button
-            type='primary'
-            size='large'
-            onClick={() => {
-              onSave({ email, pwd })
-            }}>
+          <Button type='primary' size='large' onClick={onLogin}>
             登录
           </Button>
         </div>
