@@ -10,7 +10,7 @@ function scrollToTop (setVisible) {
   }
 }
 
-export default function useListenerByScrollToTop (fn) {
+export default function useListenerByScrollToTop () {
   const [ visible, setVisible ] = useState(false)
   useEffect(() => {
     const _scrollToTop = throttle(scrollToTop).bind(this, setVisible)

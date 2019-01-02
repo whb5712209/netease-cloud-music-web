@@ -18,5 +18,8 @@ export default {
   },
   async getTopAlbum (data) {
     return get('top/album', data)
+  },
+  async getTopList (data) {
+    return get('top/list', data)
   }
 }
