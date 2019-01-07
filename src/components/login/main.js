@@ -82,7 +82,6 @@ export default ({ type = 1, onSave, onClose }) => {
   return (
     <Dialog.Global title={loginType === -1 ? '登录' : titleList[loginType]} globalClass={style.box} onClose={onClose}>
       {LoginContainer}
-      {}
     </Dialog.Global>
   )
 }

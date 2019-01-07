@@ -4,6 +4,7 @@ import Toast from './src/toast'
 import { getUuid } from '../../utils/uuid'
 import { getDom } from '../../utils/dom'
 import noop, { zIndex } from '../../config/constant'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import './message.css'
 
 export default class Message {
@@ -93,11 +94,15 @@ function MessageBox ({ style, list, callback }) {
   )
   return (
     <div className='message-box' style={toastStyle}>
-      {toastList.map(({ key, onClose, type, content, ...props }) => (
-        <Toast onClose={onClose} {...props} prefixCls={type} key={key} toastId={key}>
-          {content}
-        </Toast>
-      ))}
+      <TransitionGroup>
+        {toastList.map(({ key, onClose, type, content, ...props }) => (
+          <CSSTransition key={key} timeout={500} classNames='fade'>
+            <Toast onClose={onClose} {...props} prefixCls={type} key={key} toastId={key}>
+              {content}
+            </Toast>
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
     </div>
   )
 }

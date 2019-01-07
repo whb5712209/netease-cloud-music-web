@@ -1,5 +1,7 @@
 import React, { useContext, lazy, Suspense, memo } from 'react'
 import { Router, Route, Switch, Redirect } from 'react-router-dom'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
+
 import GlobalContext from '../store/'
 
 import Header from '../components/header'
@@ -21,25 +23,40 @@ const WebError = lazy(() => import('../pages/auxiliary/webError'))
 const UserHome = lazy(() => import('../pages/user/home'))
 const UserMessage = lazy(() => import('../pages/user/message'))
 const UserLevel = lazy(() => import('../pages/user/level'))
-export default memo(() => {
+export default () => {
   const { history } = useContext(GlobalContext)
+  console.log(history.location.hash)
   return (
     <Router basename='/' history={history}>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Header />
-        <Aside />
-        <Switch>
-          <Route exact path='/' component={Discover} />
-          <Route path='/discover' component={HomeCommonent} />
-          <LoginRoute path='/login' component={Login} />
-          <Route path='/user' component={UserCommonent} />
-          <Route path='/error' component={ErrorComponent} />
-          <Route path='*' component={WebError} />
-        </Switch>
-      </Suspense>
+      <Route
+        path='/'
+        render={({ ...props }) => {
+          const { location } = props
+          return (
+            <React.Fragment>
+              <Header />
+              <Aside />
+              <TransitionGroup className='router-box'>
+                <CSSTransition key={location.key} classNames='router' timeout={1000}>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <Switch location={location}>
+                      <Route exact path='/' component={Discover} />
+                      <Route path='/discover' component={HomeCommonent} />
+                      <LoginRoute path='/login' component={Login} />
+                      <Route path='/user' component={UserCommonent} />
+                      <Route path='/error' component={ErrorComponent} />
+                      <Route path='*' component={WebError} />
+                    </Switch>
+                  </Suspense>
+                </CSSTransition>
+              </TransitionGroup>
+            </React.Fragment>
+          )
+        }}
+      />
     </Router>
   )
-})
+}
 /**
  * 用户私有路由
  */
