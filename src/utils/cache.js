@@ -1,5 +1,5 @@
-export function supportLoaclStorage () {
-  return !!window.localStorage
+export function supportLoaclStorage() {
+  return window.localStorage && true
 }
 
 /*
@@ -7,7 +7,7 @@ export function supportLoaclStorage () {
   @param {String} name 保存数据的key值
   @param {Object} value 保存数据的值
 * */
-export function saveData (name, value) {
+export function saveData(name, value) {
   if (typeof value === undefined || value === null) return
   let storeValue = JSON.stringify(value)
   if (supportLoaclStorage()) {
@@ -18,7 +18,7 @@ export function saveData (name, value) {
   }
 }
 
-export function getData (name) {
+export function getData(name) {
   if (supportLoaclStorage()) {
     return JSON.parse(window.localStorage.getItem(name))
   }

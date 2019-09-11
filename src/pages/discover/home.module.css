@@ -115,3 +115,11 @@
 .original_item:nth-child(even) {
   background: #f4f4f4;
 }
+.more {
+  clear: both;
+  height: 32px;
+  text-align: right;
+  line-height: 32px;
+  display: block;
+  padding-right: 32px;
+}

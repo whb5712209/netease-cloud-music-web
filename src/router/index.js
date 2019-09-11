@@ -1,5 +1,5 @@
 import React, { useContext, lazy, Suspense, memo } from 'react'
-import { Router, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import GlobalContext from '../store/'
@@ -24,10 +24,8 @@ const UserHome = lazy(() => import('../pages/user/home'))
 const UserMessage = lazy(() => import('../pages/user/message'))
 const UserLevel = lazy(() => import('../pages/user/level'))
 export default () => {
-  const { history } = useContext(GlobalContext)
-  console.log(history.location.hash)
   return (
-    <Router basename='/' history={history}>
+    <Router basename='/'>
       <Route
         path='/'
         render={({ ...props }) => {

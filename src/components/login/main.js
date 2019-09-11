@@ -16,9 +16,10 @@ const titleList = {
   1: '手机号码登录',
   2: '网易账户登录'
 }
+
 export default ({ type = 1, onSave, onClose }) => {
   const { dispatch, history } = useContext(GlobalContext)
-  const [ loginType, setLoginType ] = useState(type)
+  const [loginType, setLoginType] = useState(type)
   const onLoginByPhone = useCallback(({ phone, pwd }) => {
     dispatch(ajax(API.loginByPhone, { phone, password: pwd }))
       .then((data) => {
@@ -66,7 +67,7 @@ export default ({ type = 1, onSave, onClose }) => {
         </React.Fragment>
       )
     },
-    [ loginType ]
+    [loginType]
   )
   const onLoginByEmail = useCallback(({ email, pwd }) => {
     dispatch(ajax(API.login, { email, password: pwd }))

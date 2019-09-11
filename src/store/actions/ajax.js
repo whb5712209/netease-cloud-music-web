@@ -4,7 +4,7 @@ export const REQUEST_TYPE = 'REQUEST_START'
 
 export const URL_MATCH = 'URL_MATCH'
 
-export default function ajax (ajaxFunc, params, sucCallback, failCallback) {
+export default function ajax(ajaxFunc, params, sucCallback, failCallback) {
   return (dispatch) => {
     return ajaxFunc(params).then(
       (data) => {
@@ -20,21 +20,21 @@ export default function ajax (ajaxFunc, params, sucCallback, failCallback) {
   }
 }
 
-export function setAjaxStart () {
+export function setAjaxStart() {
   return {
     type: REQUEST_TYPE,
     data: 1
   }
 }
 
-export function setAjaxSuccess () {
+export function setAjaxSuccess() {
   return {
     type: REQUEST_TYPE,
     data: 2
   }
 }
 
-export function setAjaxError () {
+export function setAjaxError() {
   return {
     type: REQUEST_TYPE,
     data: 3

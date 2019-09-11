@@ -6,14 +6,14 @@ import ajax from '../../store/actions/ajax'
 import GlobalContext from '../../store'
 
 import style from './home.module.css'
-export default function App () {
+export default function App() {
   const { dispatch } = useContext(GlobalContext)
-  const [ personalizeList, setPersonalizeList ] = useState([])
-  const [ topAlbumList, setTopAlbumList ] = useState([])
+  const [personalizeList, setPersonalizeList] = useState([])
+  const [topAlbumList, setTopAlbumList] = useState([])
 
-  const [ topFast, setTopFast ] = useState({ playlist: { tracks: [] }, privileges: [] })
-  const [ topNew, setTopNew ] = useState({ playlist: { tracks: [] }, privileges: [] })
-  const [ topOriginal, setTopOriginal ] = useState({ playlist: { tracks: [] }, privileges: [] })
+  const [topFast, setTopFast] = useState({ playlist: { tracks: [] }, privileges: [] })
+  const [topNew, setTopNew] = useState({ playlist: { tracks: [] }, privileges: [] })
+  const [topOriginal, setTopOriginal] = useState({ playlist: { tracks: [] }, privileges: [] })
 
   useEffect(() => {
     dispatch(ajax(API.getPersonalized, { limit: 8 })).then((res) => {
@@ -23,15 +23,19 @@ export default function App () {
       setTopAlbumList(res.albums)
     })
     dispatch(ajax(API.getTopList, { idx: 3 })).then((res) => {
+      res.playlist.tracks.length = 10
       setTopFast(res)
     })
     dispatch(ajax(API.getTopList, { idx: 0 })).then((res) => {
+      res.playlist.tracks.length = 10
       setTopNew(res)
     })
     dispatch(ajax(API.getTopList, { idx: 2 })).then((res) => {
+      res.playlist.tracks.length = 10
       setTopOriginal(res)
     })
   }, [])
+
   return (
     <div>
       <Header.Top />
@@ -71,10 +75,11 @@ export default function App () {
                 <ul>
                   {topFast.playlist.tracks.map((item, index) => (
                     <li className={style.fast_item} key={item.id}>
-                      <p className={style.bill_order}>{index}.</p>
+                      <p className={style.bill_order}>{index + 1}.</p>
                       <p className={style.bill_name}>{item.name}</p>
                     </li>
                   ))}
+                  <li className={`${style.more} ${style.original_item}`}>查看全部</li>
                 </ul>
               </li>
               <li className={style.bill_itme}>
@@ -85,10 +90,11 @@ export default function App () {
                 <ul>
                   {topNew.playlist.tracks.map((item, index) => (
                     <li className={style.news_item} key={item.id}>
-                      <p className={style.bill_order}>{index}.</p>
+                      <p className={style.bill_order}>{index + 1}.</p>
                       <p className={style.bill_name}>{item.name}</p>
                     </li>
                   ))}
+                  <li className={`${style.more} ${style.original_item}`}>查看全部</li>
                 </ul>
               </li>
               <li className={style.bill_itme}>
@@ -99,10 +105,11 @@ export default function App () {
                 <ul>
                   {topOriginal.playlist.tracks.map((item, index) => (
                     <li className={style.original_item} key={item.id}>
-                      <p className={style.bill_order}>{index}.</p>
+                      <p className={style.bill_order}>{index + 1}.</p>
                       <p className={style.bill_name}>{item.name}</p>
                     </li>
                   ))}
+                  <li className={`${style.more} ${style.original_item}`}>查看全部</li>
                 </ul>
               </li>
             </ul>
